@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--НЕОСНОВНОЙ СТИЛЬ (БУТСТРАП)-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!--ОСНОВНЫЕ СТИЛИ-->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>e-Shop</title>
+</head>
+
+<body>
+<div id="app">
+    <header>
+
+        <div class="search-box">
+            <input type="text" class="goods-search" v-model="searchLine" :keyup.enter="filterGoods()"/>
+            <button class="search-button" type="button" @click="filterGoods()">Искать</button>
+        </div>
+        
+
+    	<!--КОРЗИНА-->
+
+        <div class="dropdown mydropdown">
+            <button class="cart-button dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">Корзина</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#" v-if="basketGoods.length != ''">Ваша корзина</a>
+                <p v-else>Нет товаров</p>
+                <div class="basket">
+                    <div class="basket-item" v-for="good of basketGoods" :key="good.id_product">
+                        <div class="desc">
+                            <h3> {{ good.product_name }} </h3>
+                            <p> {{ good.price }} </p>
+                            <button class="removeButton" @click="delGood (good)">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+    	
+        
+
+        <!--ЗАГРУЗКА ТОВАРОВ-->
+        <div class="goods">
+            
+            <div class="product-item" v-for="good of filteredGoods" :key="good.id_product">
+                <img :src="imgCatalog" alt="">
+                <div class="desc">
+                    <h3> {{ good.product_name }} </h3>
+                    <p> {{ good.price }} </p>
+                    <button class="addButton" @click="addGood (good)">Купить</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+    
+    <script src="js/vue.js"></script>
+    <script src="js/script.js"></script> <!--ОСНОВНОЙ СКРИПТ-->
+
+
+	
+
+	<!--НЕОСНОВНОЙ СКРИПТ (БУТСТРАП)-->
+	
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
